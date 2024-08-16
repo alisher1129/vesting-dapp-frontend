@@ -1,98 +1,126 @@
-import Image from "next/image";
-import { ConnectButton } from "thirdweb/react";
-import thirdwebIcon from "@public/thirdweb.svg";
+import { ConnectButton, ConnectEmbed } from "thirdweb/react";
 import { client } from "./client";
+import { chain } from "./chain";
+import Cover from "@/app/cover";
+import ModuleOne from "./moduleOne";
+import ModuleTwo from "./moduleTwo";
 
 export default function Home() {
   return (
-    <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
-      <div className="py-20">
-        <Header />
+    <>
+      <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50">
+        <div className="flex flex-wrap items-center justify-between gap-5 w-full">
+          <a href="javascript:void(0)">
+            <img
+              src="https://cdn.prod.website-files.com/623b471f31c24a4a20eb3ca7/6294e95995e10fe9dd8ede4c_DecubateLogo-SVG.svg"
+              alt="logo"
+              className="w-36"
+            />
+          </a>
 
-        <div className="flex justify-center mb-20">
-          <ConnectButton
-            client={client}
-            appMetadata={{
-              name: "Example App",
-              url: "https://example.com",
-            }}
-          />
+          <div
+            id="collapseMenu"
+            className="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50"
+          >
+            <button
+              id="toggleClose"
+              className="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 fill-black"
+                viewBox="0 0 320.591 320.591"
+              >
+                <path
+                  d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                  data-original="#000000"
+                ></path>
+                <path
+                  d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                  data-original="#000000"
+                ></path>
+              </svg>
+            </button>
+
+            <ul className="lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
+              <li className="mb-6 hidden max-lg:block">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9Vi47FJASNOnCGetuN0FJ4Q0dyyPpKZArQ&s"
+                  alt="logo"
+                  className="w-36"
+                />
+              </li>
+              <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                <a
+                  href="javascript:void(0)"
+                  className="hover:text-[#007bff] text-[#007bff] block font-semibold text-[15px]"
+                >
+                  Home
+                </a>
+              </li>
+              <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                <a
+                  href="javascript:void(0)"
+                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                >
+                  Team
+                </a>
+              </li>
+              <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                <a
+                  href="javascript:void(0)"
+                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                >
+                  Feature
+                </a>
+              </li>
+              <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                <a
+                  href="javascript:void(0)"
+                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                >
+                  Blog
+                </a>
+              </li>
+              <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                <a
+                  href="javascript:void(0)"
+                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                >
+                  About
+                </a>
+              </li>
+              <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                <a
+                  href="javascript:void(0)"
+                  className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex max-lg:ml-auto space-x-3">
+            <ConnectButton client={client} chain={chain} />
+          </div>
         </div>
+      </header>
 
-        <ThirdwebResources />
-      </div>
-    </main>
-  );
-}
+      <Cover />
+      <ModuleOne />
+      <ModuleTwo/>
+    </>
+    // <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
+    // {/* <ConnectEmbed
+    // client={client}
+    // chain={chain}
+    // /> */}
+    // <ConnectButton
+    //  client={client}
+    //  chain={chain}
+    //  />
 
-function Header() {
-  return (
-    <header className="flex flex-col items-center mb-20 md:mb-20">
-      <Image
-        src={thirdwebIcon}
-        alt=""
-        className="size-[150px] md:size-[150px]"
-        style={{
-          filter: "drop-shadow(0px 0px 24px #a726a9a8)",
-        }}
-      />
-
-      <h1 className="text-2xl md:text-6xl font-semibold md:font-bold tracking-tighter mb-6 text-zinc-100">
-        thirdweb SDK
-        <span className="text-zinc-300 inline-block mx-1"> + </span>
-        <span className="inline-block -skew-x-6 text-blue-500"> Next.js </span>
-      </h1>
-
-      <p className="text-zinc-300 text-base">
-        Read the{" "}
-        <code className="bg-zinc-800 text-zinc-300 px-2 rounded py-1 text-sm mx-1">
-          README.md
-        </code>{" "}
-        file to get started.
-      </p>
-    </header>
-  );
-}
-
-function ThirdwebResources() {
-  return (
-    <div className="grid gap-4 lg:grid-cols-3 justify-center">
-      <ArticleCard
-        title="thirdweb SDK Docs"
-        href="https://portal.thirdweb.com/typescript/v5"
-        description="thirdweb TypeScript SDK documentation"
-      />
-
-      <ArticleCard
-        title="Components and Hooks"
-        href="https://portal.thirdweb.com/typescript/v5/react"
-        description="Learn about the thirdweb React components and hooks in thirdweb SDK"
-      />
-
-      <ArticleCard
-        title="thirdweb Dashboard"
-        href="https://thirdweb.com/dashboard"
-        description="Deploy, configure, and manage your smart contracts from the dashboard."
-      />
-    </div>
-  );
-}
-
-function ArticleCard(props: {
-  title: string;
-  href: string;
-  description: string;
-}) {
-  return (
-    <a
-      href={props.href + "?utm_source=next-template"}
-      target="_blank"
-      className="flex flex-col border border-zinc-800 p-4 rounded-lg hover:bg-zinc-900 transition-colors hover:border-zinc-700"
-    >
-      <article>
-        <h2 className="text-lg font-semibold mb-2">{props.title}</h2>
-        <p className="text-sm text-zinc-400">{props.description}</p>
-      </article>
-    </a>
+    // </main>
   );
 }
