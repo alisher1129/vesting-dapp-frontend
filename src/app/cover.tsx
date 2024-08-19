@@ -17,6 +17,8 @@ function Cover() {
     params: [ account?.address || ""]
   });
 
+ 
+
   let employeeAddress, employeeName, employeeEmail, startTime, cliffDuration, totalDuration, totalTokens, receivedTokens, exists;
 
 
@@ -27,9 +29,9 @@ function Cover() {
 
   return (
     <>
-      <div className="mt-5 bg-gray-50 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
-        <h1 className="text-4xl font-extrabold">{account ? String(employeeName) : "Employee Name" }</h1>
-        <p className="mt-4 text-sm text-gray-600">{account ? String(employeeEmail) : "Employee Email Address" }</p>
+      <div className="mt-5 bg-gray-200 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
+        <h1 className="text-4xl font-extrabold">{account ? (userData.employeeName ? String(employeeName) : "Not Registered" ): "Employee Name" }</h1>
+        <p className="mt-4 text-sm text-gray-600">{account ? (userData.employeeEmail? String(employeeEmail) : "Not Registered") : "Employee Email Address" }</p>
 
         <button
           type="button"

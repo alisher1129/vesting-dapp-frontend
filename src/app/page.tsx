@@ -1,14 +1,19 @@
+"use client";
+
 import { ConnectButton, ConnectEmbed } from "thirdweb/react";
 import { client } from "./client";
 import { chain } from "./chain";
 import Cover from "@/app/cover";
 import ModuleOne from "./moduleOne";
 import ModuleTwo from "./moduleTwo";
+import { useActiveAccount } from "thirdweb/react";
 
 export default function Home() {
+  const account = useActiveAccount();
+
   return (
     <>
-      <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50">
+      <header className="  flex shadow-md border-b-2 border-gray-400 py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50">
         <div className="flex flex-wrap items-center justify-between gap-5 w-full">
           <a href="javascript:void(0)">
             <img
@@ -18,7 +23,7 @@ export default function Home() {
             />
           </a>
 
-          <div
+          {/* <div
             id="collapseMenu"
             className="max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50"
           >
@@ -99,28 +104,110 @@ export default function Home() {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="flex max-lg:ml-auto space-x-3">
             <ConnectButton client={client} chain={chain} />
           </div>
         </div>
       </header>
+      <div className="">
+        {
+        // account == "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3"
+        1 == 1 ?  
+         (
+          <>
+            <Cover />
+            <ModuleOne />
+            <ModuleTwo />
+          </>
+        ) : (
+          <>
+            {/* <div className="flex justify-center font-bold text-2xl mt-10">Admin Dashboard</div> */}
+            <div className="flex flex-col justify-center  mt-16">
+              <div>
+                <div className="flex justify-center mb-8 font-extrabold font-serif text-5xl">
+                  Add Employee
+                </div>
+                <form className="font-[sans-serif] max-w-4xl mx-auto">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="relative flex items-center">
+                      <input
+                        type="text"
+                        placeholder="Employee Address"
+                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
+                      />
+                    </div>
 
-      <Cover />
-      <ModuleOne />
-      <ModuleTwo/>
+                    <div className="relative flex items-center">
+                      <input
+                        type="text"
+                        placeholder="Total Tokens"
+                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
+                      />
+                    </div>
+
+                    <div className="relative flex items-center">
+                      <input
+                        type="email"
+                        placeholder="Employee Name"
+                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
+                      />
+                    </div>
+
+                    <div className="relative flex items-center">
+                      <input
+                        type="password"
+                        placeholder="Employee Email"
+                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
+                  >
+                    Add
+                  </button>
+                </form>
+              </div>
+
+              <div className="mt-8">
+                <div className="flex justify-center mb-8 font-extrabold font-serif text-5xl">
+                  Remove Employee
+                </div>
+                <form className="font-[sans-serif] max-w-4xl mx-auto">
+                  <div className="flex items-center">
+                    <input
+                      type="password"
+                      placeholder="Employee Address"
+                      className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
+                  >
+                    Remove
+                  </button>
+                </form>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* <footer
+        className=" shadow-md border-t-2 border-gray-400 mt-28 bg-white text-black py-6 px-16 font-sans tracking-wide"
+      >
+        <div className="flex justify-between items-center max-lg:flex-col text-center flex-wrap gap-4">
+          <p className="text-[18px] leading-loose">
+            © ReadymadeUI. All rights reserved.
+          </p>
+        </div>
+      </footer> */}
     </>
-    // <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
-    // {/* <ConnectEmbed
-    // client={client}
-    // chain={chain}
-    // /> */}
-    // <ConnectButton
-    //  client={client}
-    //  chain={chain}
-    //  />
-
-    // </main>
   );
 }

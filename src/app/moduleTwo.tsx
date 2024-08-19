@@ -1,23 +1,126 @@
+"use client";
+
 import React from "react";
+import {
+  useActiveAccount,
+  useSendTransaction,
+  useReadContract,
+  ClaimButton,
+} from "thirdweb/react";
+import { prepareContractCall } from "thirdweb";
+import { contractVesting } from "../../utils/contract";
+import CONTRACT_ABI from "../../utils/contractABI.json";
+/* global BigInt */
 
 function ModuleTwo() {
+  // const account = useActiveAccount();
+  // const { mutate: sendTransaction } = useSendTransaction();
+  // const onClickFunction = (account) => {
+  //   const transaction = prepareContractCall({
+  //     contractVesting,
+  //     method: "withDraw",
+  //     params: [account?.address || ""]
+  //   });
+  //   sendTransaction(transaction);
+
+  // }
+
+  const account = useActiveAccount();
+  const { mutate: sendTransaction } = useSendTransaction();
+
+  const onClickFunction = async () => {
+    if (!account) {
+      console.error("No account connected");
+      return;
+    }
+
+    try {
+      const transaction = await prepareContractCall({
+        contract: contractVesting,
+        method: "withDraw",
+        params: [account?.address || ""],
+      });
+
+      sendTransaction(transaction);
+    } catch (error) {
+      console.error("Error preparing or sending transaction:", error);
+    }
+  };
+
+  const { data: userData } = useReadContract({
+    contract: contractVesting,
+    method: "employees",
+    params: [account?.address || ""],
+  });
+
+  const { data: userAvailableTokens } = useReadContract({
+    contract: contractVesting,
+    method: "availableTokens",
+    params: [account?.address || ""],
+  });
+  let employeeAddress,
+    employeeName,
+    employeeEmail,
+    startTime,
+    cliffDuration,
+    totalDuration,
+    totalTokens,
+    receivedTokens,
+    exists;
+
+  if (Array.isArray(userData)) {
+    // Destructure if it's an array or tuple
+    [
+      employeeAddress,
+      employeeName,
+      employeeEmail,
+      startTime,
+      cliffDuration,
+      totalDuration,
+      totalTokens,
+      receivedTokens,
+      exists,
+    ] = userData;
+  }
+
   return (
     <>
-      <div className="flex items-center justify-around mt-5 bg-gray-50 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
-        <div>
-          <h1 className="text-xl font-extrabold">Unlock Tokens</h1>
+      {/* <div className="mt-5 bg-gray-200 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
+        <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-6 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4">
+          <h1 className="text-xl font-extrabold">Available Tokens</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Lorem ipsum dolor sit amet, consectetur.
+            {userAvailableTokens ? String(userAvailableTokens) : "0"}
           </p>
         </div>
 
         <button
           type="button"
           className=" px-16 py-4 rounded-lg text-white text-lg tracking-wider border-none  outline-none bg-blue-600 hover:bg-blue-700"
+          onClick={onClickFunction}
         >
           Claim Tokens
         </button>
-      </div>
+      </div> */}
+
+<div className="mt-5 bg-gray-200 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto flex flex-row justify-around">
+  
+  <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-6 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden">
+    <h1 className="text-xl font-extrabold">Available Tokens</h1>
+    <p className="mt-1 text-sm text-gray-500">
+      {userAvailableTokens ? String(userAvailableTokens) : "0"}
+    </p>
+  </div>
+
+  <button
+    type="button"
+    className="px-16 rounded-lg text-white font-bold text-lg tracking-wider border-none outline-none bg-blue-600 hover:bg-blue-700 overflow-hidden"
+    onClick={onClickFunction}
+  >
+    Claim Tokens
+  </button>
+  
+</div>
+
     </>
   );
 }
