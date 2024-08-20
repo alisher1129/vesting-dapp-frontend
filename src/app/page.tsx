@@ -7,6 +7,7 @@ import Cover from "@/app/cover";
 import ModuleOne from "./moduleOne";
 import ModuleTwo from "./moduleTwo";
 import { useActiveAccount } from "thirdweb/react";
+import Owner from "./owner";
 
 export default function Home() {
   const account = useActiveAccount();
@@ -114,7 +115,7 @@ export default function Home() {
       <div className="">
         {
         // account == "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3"
-        1 == 1 ?  
+        1 == 2 ?  
          (
           <>
             <Cover />
@@ -123,78 +124,8 @@ export default function Home() {
           </>
         ) : (
           <>
-            {/* <div className="flex justify-center font-bold text-2xl mt-10">Admin Dashboard</div> */}
-            <div className="flex flex-col justify-center  mt-16">
-              <div>
-                <div className="flex justify-center mb-8 font-extrabold font-serif text-5xl">
-                  Add Employee
-                </div>
-                <form className="font-[sans-serif] max-w-4xl mx-auto">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="relative flex items-center">
-                      <input
-                        type="text"
-                        placeholder="Employee Address"
-                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
-                      />
-                    </div>
-
-                    <div className="relative flex items-center">
-                      <input
-                        type="text"
-                        placeholder="Total Tokens"
-                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
-                      />
-                    </div>
-
-                    <div className="relative flex items-center">
-                      <input
-                        type="email"
-                        placeholder="Employee Name"
-                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
-                      />
-                    </div>
-
-                    <div className="relative flex items-center">
-                      <input
-                        type="password"
-                        placeholder="Employee Email"
-                        className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
-                  >
-                    Add
-                  </button>
-                </form>
-              </div>
-
-              <div className="mt-8">
-                <div className="flex justify-center mb-8 font-extrabold font-serif text-5xl">
-                  Remove Employee
-                </div>
-                <form className="font-[sans-serif] max-w-4xl mx-auto">
-                  <div className="flex items-center">
-                    <input
-                      type="password"
-                      placeholder="Employee Address"
-                      className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
-                    />
-                  </div>
-
-                  <button
-                    type="button"
-                    className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
-                  >
-                    Remove
-                  </button>
-                </form>
-              </div>
-            </div>
+            <div className="flex justify-center font-bold font-serif text-6xl mt-8">Admin Dashboard</div>
+            <Owner/>
           </>
         )}
       </div>
