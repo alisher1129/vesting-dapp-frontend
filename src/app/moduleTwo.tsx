@@ -1,4 +1,4 @@
-"use client";
+// "use client"
 
 import React from "react";
 import {
@@ -10,6 +10,9 @@ import {
 import { prepareContractCall } from "thirdweb";
 import { contractVesting } from "../../utils/contract";
 import CONTRACT_ABI from "../../utils/contractABI.json";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 /* global BigInt */
 
 function ModuleTwo() {
@@ -30,6 +33,7 @@ function ModuleTwo() {
 
   const onClickFunction = async () => {
     if (!account) {
+      toast.error("Please connect your account");
       console.error("No account connected");
       return;
     }

@@ -112,10 +112,9 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <div className="">
+      <div >
         {
-        // account == "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3"
-        1 == 2 ?  
+     1 == 1 ?
          (
           <>
             <Cover />
@@ -124,8 +123,10 @@ export default function Home() {
           </>
         ) : (
           <>
-            <div className="flex justify-center font-bold font-serif text-6xl mt-8">Admin Dashboard</div>
-            <Owner/>
+            <div className="flex justify-center font-bold font-serif text-6xl mt-8">
+              Admin Dashboard
+            </div>
+            <Owner />
           </>
         )}
       </div>

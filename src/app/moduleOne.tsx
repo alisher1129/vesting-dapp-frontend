@@ -13,7 +13,7 @@ import {
 function ModuleOne() {
 
     const account = useActiveAccount();
-    const { data:userData, isLoading: loadingUserName } = useReadContract({
+    const { data:userData } = useReadContract({
       contract: contractVesting,
       method: "employees",
       params: [ account?.address || ""]

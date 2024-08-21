@@ -1,327 +1,309 @@
 [
 	{
-	  "type": "constructor",
-	  "name": "",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_token",
-		  "internalType": "contract IERC20"
-		}
-	  ],
-	  "outputs": [],
-	  "stateMutability": "nonpayable"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_employee",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_totalTokens",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_employeeName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_employeeEmail",
+				"type": "string"
+			}
+		],
+		"name": "addEmployee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-	  "type": "event",
-	  "name": "EmployeeAdded",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "employeeAddress",
-		  "indexed": true,
-		  "internalType": "address"
-		},
-		{
-		  "type": "string",
-		  "name": "employeeName",
-		  "indexed": false,
-		  "internalType": "string"
-		},
-		{
-		  "type": "string",
-		  "name": "employeeEmail",
-		  "indexed": false,
-		  "internalType": "string"
-		},
-		{
-		  "type": "uint256",
-		  "name": "startTime",
-		  "indexed": false,
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "cliffDuration",
-		  "indexed": false,
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "totalDuration",
-		  "indexed": false,
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "totalTokens",
-		  "indexed": false,
-		  "internalType": "uint256"
-		}
-	  ],
-	  "outputs": [],
-	  "anonymous": false
+		"inputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "_token",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
-	  "type": "event",
-	  "name": "EmployeeRemoved",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "employeeAddress",
-		  "indexed": true,
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [],
-	  "anonymous": false
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "employeeAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "employeeName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "employeeEmail",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "startTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "cliffDuration",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "totalDuration",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "totalTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "EmployeeAdded",
+		"type": "event"
 	},
 	{
-	  "type": "event",
-	  "name": "TokensReleased",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "employeeAddress",
-		  "indexed": true,
-		  "internalType": "address"
-		},
-		{
-		  "type": "uint256",
-		  "name": "amount",
-		  "indexed": false,
-		  "internalType": "uint256"
-		}
-	  ],
-	  "outputs": [],
-	  "anonymous": false
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_employee",
+				"type": "address"
+			}
+		],
+		"name": "removeEmployee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "addEmployee",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_employee",
-		  "internalType": "address"
-		},
-		{
-		  "type": "uint256",
-		  "name": "_totalTokens",
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "string",
-		  "name": "_employeeName",
-		  "internalType": "string"
-		},
-		{
-		  "type": "string",
-		  "name": "_employeeEmail",
-		  "internalType": "string"
-		}
-	  ],
-	  "outputs": [],
-	  "stateMutability": "nonpayable"
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "employeeAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "TokensReleased",
+		"type": "event"
 	},
 	{
-	  "type": "function",
-	  "name": "availableTokens",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_employee",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [
-		{
-		  "type": "uint256",
-		  "name": "",
-		  "internalType": "uint256"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_employee",
+				"type": "address"
+			}
+		],
+		"name": "withDraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "balanceOf",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_account",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [
-		{
-		  "type": "uint256",
-		  "name": "",
-		  "internalType": "uint256"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_employee",
+				"type": "address"
+			}
+		],
+		"name": "availableTokens",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "calculateVestedTokens",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_employee",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [
-		{
-		  "type": "uint256",
-		  "name": "",
-		  "internalType": "uint256"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_account",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "employeeCheck",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_employee",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [
-		{
-		  "type": "bool",
-		  "name": "_value",
-		  "internalType": "bool"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_employee",
+				"type": "address"
+			}
+		],
+		"name": "calculateVestedTokens",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "employees",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [
-		{
-		  "type": "address",
-		  "name": "employeeAddress",
-		  "internalType": "address"
-		},
-		{
-		  "type": "string",
-		  "name": "employeeName",
-		  "internalType": "string"
-		},
-		{
-		  "type": "string",
-		  "name": "employeeEmail",
-		  "internalType": "string"
-		},
-		{
-		  "type": "uint256",
-		  "name": "startTime",
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "cliffDuration",
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "totalDuration",
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "totalTokens",
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "uint256",
-		  "name": "receivedTokens",
-		  "internalType": "uint256"
-		},
-		{
-		  "type": "bool",
-		  "name": "exists",
-		  "internalType": "bool"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_employee",
+				"type": "address"
+			}
+		],
+		"name": "employeeCheck",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "_value",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "getTime",
-	  "inputs": [],
-	  "outputs": [
-		{
-		  "type": "uint256",
-		  "name": "",
-		  "internalType": "uint256"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "employees",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "employeeAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "employeeName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "employeeEmail",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "startTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "cliffDuration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalDuration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalTokens",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "receivedTokens",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "exists",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "owner",
-	  "inputs": [],
-	  "outputs": [
-		{
-		  "type": "address",
-		  "name": "",
-		  "internalType": "address"
-		}
-	  ],
-	  "stateMutability": "view"
+		"inputs": [],
+		"name": "getTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "removeEmployee",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_employee",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [],
-	  "stateMutability": "nonpayable"
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
-	  "type": "function",
-	  "name": "token",
-	  "inputs": [],
-	  "outputs": [
-		{
-		  "type": "address",
-		  "name": "",
-		  "internalType": "contract IERC20"
-		}
-	  ],
-	  "stateMutability": "view"
-	},
-	{
-	  "type": "function",
-	  "name": "withDraw",
-	  "inputs": [
-		{
-		  "type": "address",
-		  "name": "_employee",
-		  "internalType": "address"
-		}
-	  ],
-	  "outputs": [],
-	  "stateMutability": "nonpayable"
+		"inputs": [],
+		"name": "token",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
-  ]
+]

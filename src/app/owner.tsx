@@ -1,72 +1,68 @@
-"use client";
+"use client"
 
 import React, { useState } from "react";
-import {
-    useActiveAccount,
-    useSendTransaction,
-  } from "thirdweb/react";
-  import { prepareContractCall } from "thirdweb";
+import { useActiveAccount, useSendTransaction } from "thirdweb/react";
+import { prepareContractCall } from "thirdweb";
+import { contractVesting } from "../../utils/contract";
 
 function Owner() {
-    const [ employeeAddress , setEmployeeAddress] = useState<string>("")
-    const [ totalToken , setTotalToken] = useState<number>(0)
-    const [ employeeNameData , setEmployeeName] = useState<string>("")
-    const [ employeeEmailData , setEmployeeEmail] = useState<string>("")
-    const [ removeEmployeeMapping , setRemoveEmployeeMapping] = useState<string>("")
+  const [employeeAddress, setEmployeeAddress] = useState<string>("");
+  const [totalToken, setTotalToken] = useState<string>("");
+  const [employeeNameData, setEmployeeName] = useState<string>("");
+  const [employeeEmailData, setEmployeeEmail] = useState<string>("");
+  const [removeEmployeeMapping, setRemoveEmployeeMapping] = useState<string>("");
 
+  const account = useActiveAccount();
+  const { mutate: sendTransaction } = useSendTransaction();
+  //Function to add employee in mapping
+  const addEmployeeFunction = async () => {
+      if (!account) {
+        console.error("No account connected");
+        return;
+      }
 
-    const account = useActiveAccount();
-    const { mutate: sendTransaction } = useSendTransaction();
-    const onClickFunction = async () => {
-        if (!account) {
-          console.error("No account connected");
-          return;
-        }
-    
-        try {
-           const transaction = await prepareContractCall({
-            contractVesting,
-            method: "addEmployee",
-            params: [ employeeAddress , totalToken ,employeeName,employeeEmail ],
-          });
-    
-          sendTransaction(transaction);
-        } catch (error) {
-          console.error("Error preparing or sending transaction:", error);
-        }
-      };
+      try {
+         const transaction = await prepareContractCall({
+          contract:contractVesting,
+          method: "addEmployee",
+          params: [ employeeAddress , totalToken ,employeeNameData,employeeEmailData ],
+        });
 
+        sendTransaction(transaction);
+      } catch (error) {
+        console.error("Error preparing or sending transaction:", error);
+      }
+    };
 
-      const onClickFunctionREmove = async () => {
-        if (!account) {
-          console.error("No account connected");
-          return;
-        }
-    
-        try {
-          const transaction = await prepareContractCall({
-            contract: contractVesting,
-            method: "removeEmployee",
-            params: [ removeEmployeeMapping ]
-          });
-    
-          sendTransaction(transaction);
-        } catch (error) {
-          console.error("Error preparing or sending transaction:", error);
-        }
-      };
+  //Function to remove employee from mapping
+  const removeEmployee = async () => {
+    if (!account) {
+      console.error("No account connected");
+      return;
+    }
+
+    try {
+      const transaction = await prepareContractCall({
+        contract: contractVesting,
+        method: "removeEmployee",
+        params: [removeEmployeeMapping],
+      });
+
+      sendTransaction(transaction);
+    } catch (error) {
+      console.error("Error preparing or sending transaction:", error);
+    }
+  };
 
   return (
     <>
       <div className="flex flex-col justify-center  mt-16">
-
-
         {/* ADD EMPLOYEE */}
         <div>
           <div className="flex justify-center mb-8 font-extrabold font-serif text-5xl">
             Add Employee
           </div>
-          <form onSubmit={onClickFunction} className="font-[sans-serif] max-w-4xl mx-auto">
+          <form className="font-[sans-serif] max-w-4xl mx-auto">
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="relative flex items-center">
                 <input
@@ -110,7 +106,8 @@ function Owner() {
             </div>
 
             <button
-              type="submit"
+              type="button"
+              onClick={addEmployeeFunction}
               className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
             >
               Add
@@ -124,19 +121,20 @@ function Owner() {
           <div className="flex justify-center mb-8 font-extrabold font-serif text-5xl">
             Remove Employee
           </div>
-          <form onSubmit={onClickFunctionREmove} className="font-[sans-serif] max-w-4xl mx-auto">
+          <form className="font-[sans-serif] max-w-4xl mx-auto">
             <div className="flex items-center">
               <input
                 type="text"
                 value={removeEmployeeMapping}
-                onChange={(e)=>setRemoveEmployeeMapping(e.target.value)}
+                onChange={(e) => setRemoveEmployeeMapping(e.target.value)}
                 placeholder="Employee Address"
                 className="px-20 py-4 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
               />
             </div>
 
             <button
-              type="submit"
+              type="button"
+              onClick={removeEmployee}
               className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
             >
               Remove
