@@ -1,9 +1,11 @@
 "use client"
 
 import React, { useState } from "react";
-import { useActiveAccount, useSendTransaction } from "thirdweb/react";
+import { useActiveAccount, useSendTransaction  , useReadContract } from "thirdweb/react";
 import { prepareContractCall } from "thirdweb";
 import { contractVesting } from "../../utils/contract";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Owner() {
   const [employeeAddress, setEmployeeAddress] = useState<string>("");
@@ -17,8 +19,7 @@ function Owner() {
   //Function to add employee in mapping
   const addEmployeeFunction = async () => {
       if (!account) {
-        console.error("No account connected");
-        return;
+        toast.error("No Wallet Connected");
       }
 
       try {
@@ -37,8 +38,8 @@ function Owner() {
   //Function to remove employee from mapping
   const removeEmployee = async () => {
     if (!account) {
-      console.error("No account connected");
-      return;
+      toast.error("No Wallet Connected");
+    
     }
 
     try {
@@ -47,13 +48,28 @@ function Owner() {
         method: "removeEmployee",
         params: [removeEmployeeMapping],
       });
-
       sendTransaction(transaction);
+
     } catch (error) {
       console.error("Error preparing or sending transaction:", error);
     }
   };
 
+
+  //Function to check employee exist or not
+  const {data: checkToRemove } =  useReadContract({ 
+    contract:contractVesting, 
+    method: "employeeCheck", 
+    params: [removeEmployeeMapping],
+  })
+  const {data: checkToAdd } =  useReadContract({ 
+    contract:contractVesting, 
+    method: "employeeCheck", 
+    params: [employeeAddress] ,
+  })
+  const connectWallet = ()=> toast.error("No Wallet Connected");
+  const notExist = ()=>      toast.error("Employee doesn't exist");
+  const alreadyExist = ()=> toast.error("Employee already exist");  
   return (
     <>
       <div className="flex flex-col justify-center  mt-16">
@@ -107,7 +123,7 @@ function Owner() {
 
             <button
               type="button"
-              onClick={addEmployeeFunction}
+              onClick={account ? (checkToAdd ?  alreadyExist : addEmployeeFunction  ): connectWallet }
               className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
             >
               Add
@@ -134,7 +150,7 @@ function Owner() {
 
             <button
               type="button"
-              onClick={removeEmployee}
+              onClick={account ?(checkToRemove ? removeEmployee : notExist ): connectWallet}
               className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
             >
               Remove

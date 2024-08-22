@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { ConnectButton, ConnectEmbed } from "thirdweb/react";
+import { ConnectButton} from "thirdweb/react";
 import { client } from "./client";
 import { chain } from "./chain";
 import Cover from "@/app/cover";
@@ -11,6 +11,9 @@ import Owner from "./owner";
 
 export default function Home() {
   const account = useActiveAccount();
+  const adminAccount = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS;
+  const smartContract = process.env.NEXT_PUBLIC_SMART_CONTRACT_ADDRESS;
+  console.log("admin address", adminAccount , account,smartContract)
 
   return (
     <>
@@ -114,7 +117,7 @@ export default function Home() {
       </header>
       <div >
         {
-     1 == 1 ?
+     account == adminAccount ?
          (
           <>
             <Cover />
@@ -128,7 +131,7 @@ export default function Home() {
             </div>
             <Owner />
           </>
-        )}
+        ) }
       </div>
 
       {/* <footer

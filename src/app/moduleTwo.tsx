@@ -4,12 +4,10 @@ import React from "react";
 import {
   useActiveAccount,
   useSendTransaction,
-  useReadContract,
-  ClaimButton,
+  useReadContract
 } from "thirdweb/react";
 import { prepareContractCall } from "thirdweb";
 import { contractVesting } from "../../utils/contract";
-import CONTRACT_ABI from "../../utils/contractABI.json";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -33,10 +31,9 @@ function ModuleTwo() {
 
   const onClickFunction = async () => {
     if (!account) {
-      toast.error("Please connect your account");
-      console.error("No account connected");
-      return;
+      toast.error("No Wallet Connected");
     }
+    
 
     try {
       const transaction = await prepareContractCall({
@@ -87,6 +84,11 @@ function ModuleTwo() {
     ] = userData;
   }
 
+  const claimedError = ()=> toast.error("You have already claimed");
+  const shouldWait = ()=> toast.error("You should wait");
+  const connectWallet = ()=>       toast.error("No Wallet Connected");
+
+
   return (
     <>
       {/* <div className="mt-5 bg-gray-200 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
@@ -118,7 +120,7 @@ function ModuleTwo() {
   <button
     type="button"
     className="px-16 rounded-lg text-white font-bold text-lg tracking-wider border-none outline-none bg-blue-600 hover:bg-blue-700 overflow-hidden"
-    onClick={onClickFunction}
+    onClick={account ? (totalTokens != receivedTokens ? (totalTokens == userAvailableTokens ?  onClickFunction : shouldWait ) : claimedError) : connectWallet}
   >
     Claim Tokens
   </button>
