@@ -1,6 +1,6 @@
 // "use client"
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useActiveAccount,
   useSendTransaction,
@@ -32,20 +32,33 @@ function ModuleTwo() {
   const onClickFunction = async () => {
     if (!account) {
       toast.error("No Wallet Connected");
-    }
-    
+    }else{
+if(exists){
+  if(totalTokens==receivedTokens){
+    toast.error("You have already claimed")
 
+  }else{
     try {
       const transaction = await prepareContractCall({
         contract: contractVesting,
         method: "withDraw",
         params: [account?.address || ""],
       });
-
+  
       sendTransaction(transaction);
+      
     } catch (error) {
       console.error("Error preparing or sending transaction:", error);
     }
+  }
+  
+}else{
+  toast.error("Not Registered");
+}
+    
+    }
+    
+
   };
 
   const { data: userData } = useReadContract({
@@ -87,7 +100,8 @@ function ModuleTwo() {
   const claimedError = ()=> toast.error("You have already claimed");
   const shouldWait = ()=> toast.error("You should wait");
   const connectWallet = ()=>       toast.error("No Wallet Connected");
-
+  
+useEffect(()=>toast.done("Done"),[receivedTokens])
 
   return (
     <>
@@ -120,7 +134,8 @@ function ModuleTwo() {
   <button
     type="button"
     className="px-16 rounded-lg text-white font-bold text-lg tracking-wider border-none outline-none bg-blue-600 hover:bg-blue-700 overflow-hidden"
-    onClick={account ? (totalTokens != receivedTokens ? (totalTokens == userAvailableTokens ?  onClickFunction : shouldWait ) : claimedError) : connectWallet}
+    // onClick={account ? (totalTokens != receivedTokens ? (totalTokens == userAvailableTokens ?  onClickFunction : shouldWait ) : claimedError) : connectWallet}
+    onClick={onClickFunction}
   >
     Claim Tokens
   </button>

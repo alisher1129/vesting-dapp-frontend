@@ -6,6 +6,8 @@ import "./globals.css";
 import { ThirdwebProvider } from "./thirdweb";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Header from "../app/Header"
+
 
 
 
@@ -28,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThirdwebProvider>
+<Header/>
           {children}
           <ToastContainer/>
         </ThirdwebProvider>
