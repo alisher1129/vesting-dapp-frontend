@@ -10,41 +10,18 @@ import { prepareContractCall } from "thirdweb";
 import { contractVesting } from "../../../utils/contract";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { exists } from "thirdweb/extensions/lens";
 
 function Owner() {
   const [employeeAddress, setEmployeeAddress] = useState<string>("");
   const [totalToken, setTotalToken] = useState<string>("");
   const [employeeNameData, setEmployeeName] = useState<string>("");
   const [employeeEmailData, setEmployeeEmail] = useState<string>("");
-  const [removeEmployeeMapping, setRemoveEmployeeMapping] =
-    useState<string>("");
+  const [removeEmployeeMapping, setRemoveEmployeeMapping] = useState<string>("");
 
   const account = useActiveAccount();
-  const adminAccount = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS;
-  
-
+  const adminAccount = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS; 
   const { mutate: sendTransaction } = useSendTransaction();
-  //Function to add employee in mapping
-  //   const addEmployeeFunction = async () => {
-  //       if (!account) {
-  //         toast.error("No Wallet Connected");
-  //       }
-
-  //       try {
-  //          const transaction = await prepareContractCall({
-  //           contract:contractVesting,
-  //           method: "addEmployee",
-  //           params: [ employeeAddress , totalToken ,employeeNameData,employeeEmailData ],
-  //         });
-
-  //         sendTransaction(transaction);
-  //       } catch (error) {
-  //         console.error("Error preparing or sending transaction:", error);
-  //       }
-  //     };
-
-  //
+ 
 
   //Function to remove employee from mapping
   const addEmployeeFunction = async () => {
@@ -115,10 +92,7 @@ function Owner() {
     method: "employeeCheck",
     params: [employeeAddress],
   });
-  const connectWallet = () => toast.error("No Wallet Connected");
-  const notExist = () => toast.error("Employee doesn't exist");
-  const alreadyExist = () => toast.error("Employee already exist");
-  const onlyOwner = () => toast.error("Only owner can perform this action");
+
 
   return (
     <>
@@ -173,16 +147,7 @@ function Owner() {
 
             <button
               type="button"
-            //   onClick={
-            //     account
-            //       ? myAccount == adminAccount
-            //         ? checkToAdd
-            //           ? alreadyExist
-            //           : addEmployeeFunction
-            //         : onlyOwner
-            //       : connectWallet
-            //   }
-            onClick={addEmployeeFunction}
+              onClick={addEmployeeFunction}
               className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
             >
               Add
@@ -209,7 +174,6 @@ function Owner() {
 
             <button
               type="button"
-              //   onClick={account ?( myAccount == adminAccount ? (checkToRemove ? removeEmployeeFunction : notExist) : onlyOwner ): connectWallet}
               onClick={removeEmployeeFunction}
               className="mt-8 px-6 py-3 text-sm w-full bg-[#007bff] hover:bg-[#006bff] text-white rounded transition-all"
             >
