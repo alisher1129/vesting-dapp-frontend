@@ -32,7 +32,7 @@ export default function RootLayout({
         <ThirdwebProvider>
 <Header/>
           {children}
-          <ToastContainer autoClose={2000} />
+          <ToastContainer autoClose={1700} />
         </ThirdwebProvider>
       </body>
     </html>
