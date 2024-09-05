@@ -12,12 +12,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Owner() {
-  const [employeeAddress, setEmployeeAddress] = useState<string>("");
-  const [totalToken, setTotalToken] = useState<string>("");
-  const [employeeNameData, setEmployeeName] = useState<string>("");
-  const [employeeEmailData, setEmployeeEmail] = useState<string>("");
+  const [employeeAddress, setEmployeeAddress] = useState("");
+  const [totalToken, setTotalToken] = useState("");
+  const [employeeNameData, setEmployeeName] = useState("");
+  const [employeeEmailData, setEmployeeEmail] = useState("");
   const [removeEmployeeMapping, setRemoveEmployeeMapping] =
-    useState<string>("");
+    useState("");
 
   const account = useActiveAccount();
   const adminAccount = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS;
