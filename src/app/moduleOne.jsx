@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React , { useEffect}from 'react'
 import {
     useActiveAccount,
     // useContractEvents,
@@ -13,14 +13,14 @@ import {
 function ModuleOne() {
 
     const account = useActiveAccount();
-    const { data:userData } = useReadContract({
+    const { data:userData , refetch:refetchUserData } = useReadContract({
       contract: contractVesting,
       method: "employees",
       params: [ account?.address || ""]
     });
 
 
-    const { data:userToken  } = useReadContract({
+    const { data:userToken , refetch:refetchUserToken  } = useReadContract({
       contract: contractVesting,
       method: "calculateVestedTokens",
       params: [ account?.address || ""]
@@ -35,8 +35,19 @@ function ModuleOne() {
     }
 
 
+
+    useEffect(() => {
+      if (account) {
+        // Refetch contract data when account changes
+        refetchUserData();
+        refetchUserToken();
+   
+      }
+    }, [account]);
+
   return (
-   <> <div className="mt-5 bg-gray-200 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
+   <> 
+   <div className="mt-5 bg-gray-200 text-gray-800 p-8 w-full rounded-lg font-[sans-serif] max-w-screen-2xl mx-auto">
    
    <div className="flex">
    <div
@@ -63,7 +74,8 @@ function ModuleOne() {
    </div>
    
  
-    </div></>
+    </div>
+    </>
   )
 }
 

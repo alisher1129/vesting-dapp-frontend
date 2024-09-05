@@ -1,17 +1,12 @@
-'use client'
+"use client";
 
 // import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThirdwebProvider } from "./thirdweb";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import Header from "../app/Header"
-
-
-
-
-
+import "react-toastify/dist/ReactToastify.css";
+import Header from "./Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,16 +16,12 @@ const inter = Inter({ subsets: ["latin"] });
 //     "Starter template for using thirdweb SDK with Next.js App router",
 // };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <ThirdwebProvider>
-<Header/>
+          <Header />
           {children}
           <ToastContainer autoClose={1700} />
         </ThirdwebProvider>

@@ -16,17 +16,24 @@ function Owner() {
   const [totalToken, setTotalToken] = useState<string>("");
   const [employeeNameData, setEmployeeName] = useState<string>("");
   const [employeeEmailData, setEmployeeEmail] = useState<string>("");
-  const [removeEmployeeMapping, setRemoveEmployeeMapping] = useState<string>("");
+  const [removeEmployeeMapping, setRemoveEmployeeMapping] =
+    useState<string>("");
 
   const account = useActiveAccount();
-  const adminAccount = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS; 
+  const adminAccount = process.env.NEXT_PUBLIC_ADMIN_WALLET_ADDRESS;
   const { mutate: sendTransaction } = useSendTransaction();
- 
 
   //Function to remove employee from mapping
   const addEmployeeFunction = async () => {
     if (!account) {
       toast.error("No Wallet Connected");
+    } else if (
+      !employeeAddress ||
+      !totalToken ||
+      !employeeNameData ||
+      !employeeEmailData
+    ) {
+      toast.error("field cannot be empty");
     } else {
       if (account.address == adminAccount) {
         if (!checkToAdd) {
@@ -59,6 +66,10 @@ function Owner() {
   const removeEmployeeFunction = async () => {
     if (!account) {
       toast.error("No Wallet Connected");
+    }
+
+    if (!removeEmployeeMapping) {
+      toast.error("field cannot be empty");
     } else {
       if (account.address == adminAccount) {
         if (checkToRemove) {
@@ -92,7 +103,6 @@ function Owner() {
     method: "employeeCheck",
     params: [employeeAddress],
   });
-
 
   return (
     <>
