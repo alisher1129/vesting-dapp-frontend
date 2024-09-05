@@ -23,6 +23,6 @@
       "@public/*": ["./public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/cover.jsx", "src/app/layout.jsx", "src/app/Header.jsx", "src/app/client.js", "src/app/chain.js", "src/app/Owner/page.jsx", "src/app/thirdweb.js", "src/app/page.jsx", "src/app/moduleTwo.jsx", "src/app/moduleOne.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/cover.jsx", "src/app/layout.jsx", "src/app/Header.jsx", "src/app/client.js", "src/app/chain.js", "src/app/Owner/page.jsx", "src/app/thirdweb.js", "src/app/page.jsx", "src/app/moduleTwo.jsx", "src/app/moduleOne.jsx", "utils/contract.js"],
   "exclude": ["node_modules"]
 }

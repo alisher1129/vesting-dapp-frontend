@@ -1,6 +1,5 @@
 "use client";
 
-// import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThirdwebProvider } from "./thirdweb";
@@ -10,8 +9,8 @@ import Header from "./Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "thirdweb SDK + Next starter",
+// export const metadata = {
+//   title: "Vesting Dapp",
 //   description:
 //     "Starter template for using thirdweb SDK with Next.js App router",
 // };
