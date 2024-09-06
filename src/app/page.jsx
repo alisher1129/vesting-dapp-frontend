@@ -1,6 +1,6 @@
 "use client";
 
-import Cover from "@/app/cover";
+import Cover from "../app/cover";
 import ModuleOne from "./moduleOne";
 import ModuleTwo from "./moduleTwo";
 
